@@ -1,5 +1,5 @@
-const MODEL="@cf/meta/llama-3.1-8b-instruct-fp8-fast";
-const FALLBACK_MODEL="@cf/meta/llama-3.3-70b-instruct-fp8-fast";
+const MODEL="@cf/meta/llama-3.3-70b-instruct-fp8-fast";
+const FALLBACK_MODEL="@cf/meta/llama-3.1-8b-instruct-fp8-fast";
 const IMAGE_MODEL="@cf/black-forest-labs/flux-2-klein-4b";
 const hits=new Map();
 const isAllowedOrigin=value=>{if(!value)return false;try{const u=new URL(value);if(u.protocol!=="https:")return false;const host=u.hostname.toLowerCase();return host==="ellool-ai-studio.vercel.app"||host==="ellool.vercel.app"||host==="ellool-ellool.vercel.app"||host==="ellool-git-main-ellool.vercel.app"||(host.startsWith("ellool-ai-studio-")&&host.endsWith("-ellool.vercel.app"))}catch{return false}};
