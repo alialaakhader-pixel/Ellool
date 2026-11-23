@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELLOOL AI — اللول</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<style>
+body{font-family:Cairo,Tajawal,sans-serif;background:radial-gradient(ellipse at 12% 8%,rgba(20,184,166,.12),transparent 35%),radial-gradient(ellipse at 88% 90%,rgba(99,102,241,.12),transparent 35%),#020617}
+:root{color-scheme:dark}.card{backdrop-filter:blur(18px);box-shadow:0 16px 50px rgba(0,0,0,.18)}
+.brandmark{background:linear-gradient(145deg,#2dd4bf,#0f766e 55%,#4338ca);box-shadow:0 8px 28px #0d948855;border:1px solid #99f6e455}
+.brandword{background:linear-gradient(90deg,#99f6e4,#67e8f9,#c4b5fd);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dropzone{border:1px dashed #475569;background:#0b1220;border-radius:16px;padding:14px;text-align:center}
+.preview-media{max-height:320px;width:100%;object-fit:contain;background:#020617;border-radius:14px}
+.glass-head{background:rgba(15,23,42,.72);backdrop-filter:blur(20px)}
+body.locked aside,body.locked #menuBtn,body.locked #mode{display:none!important}
+body.locked #chatIn{-webkit-text-security:disc}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:rgba(245,158,11,.3);border-radius:9999px}
+.view{display:none;flex:1;min-height:0;flex-direction:column}.view.active{display:flex}
+.inp{width:100%;background:#020617;border:1px solid #334155;border-radius:14px;padding:10px 12px;font-size:13px;color:#e2e8f0;outline:none}
+.inp:focus{border-color:#f59e0b}
+.btn{background:linear-gradient(90deg,#f59e0b,#f97316);color:#0f172a;font-weight:800;font-size:13px;border-radius:14px;padding:10px 18px;transition:.15s}
+.btn:active{transform:scale(.97)}.btn:disabled{opacity:.5;cursor:wait}
+.btn2{background:#1e293b;border:1px solid #334155;color:#e2e8f0;border-radius:12px;padding:6px 12px;font-size:12px}
+.btn2:hover{background:#334155}
+.card{background:rgba(15,23,42,.8);border:1px solid #1e293b;border-radius:20px;padding:18px}
+.lbl{font-size:12px;color:#94a3b8;display:block;margin-bottom:4px}
+.nav{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:14px;font-size:13px;color:#94a3b8;text-align:right}
+.nav.active,.nav:hover{background:rgba(245,158,11,.12);color:#fbbf24}
+.md p{margin:.5em 0;line-height:1.9}.md ul{list-style:disc;padding-right:1.4em}.md ol{list-style:decimal;padding-right:1.4em}
+.md h1,.md h2,.md h3{font-weight:800;margin:.8em 0 .3em}.md a{color:#fbbf24;text-decoration:underline}
+.md code:not(pre code){background:#1e293b;padding:1px 6px;border-radius:6px;font-size:12px;direction:ltr;display:inline-block}
+.md table{border-collapse:collapse;margin:.6em 0}.md th,.md td{border:1px solid #334155;padding:4px 8px}
+.codebox{margin:.7em 0;border:1px solid #1e293b;border-radius:14px;overflow:hidden;direction:ltr;text-align:left}
+.codebar{display:flex;justify-content:space-between;align-items:center;background:#0b1220;padding:6px 10px;font-size:11px;color:#94a3b8}
+.codebox pre{margin:0;padding:12px;overflow-x:auto;background:#020617;font-size:12.5px;line-height:1.6}
+.codebox button{margin-left:10px;color:#fbbf24}
+.dot{animation:b 1s infinite ease-in-out alternate}@keyframes b{from{opacity:.2}to{opacity:1}}
+body.locked aside,body.locked #menuBtn,body.locked #mode{display:none!important}
+body.locked #chatIn{-webkit-text-security:disc}
+</style>
+</head>
+<body class="locked bg-slate-950 text-slate-100 h-screen overflow-hidden">
+
+<div id="app" class="h-full w-full relative">
+ <div class="flex h-full">
+  <aside id="side" class="w-72 bg-slate-900 border-l border-slate-800 flex flex-col z-30 absolute lg:relative inset-y-0 right-0 translate-x-full lg:translate-x-0 transition-transform">
+    <div class="p-4 flex items-center gap-3 border-b border-slate-800">
+      <div class="w-11 h-11 rounded-2xl brandmark flex items-center justify-center"><svg viewBox="0 0 64 64" class="w-8 h-8" aria-hidden="true" fill="none"><path d="M32 5 51 16v22L32 59 13 48V16L32 5Z" stroke="white" stroke-width="2.5" opacity=".9"/><path d="M19 34c0-8 6-14 13-14s13 6 13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 40c3 4 6 6 9 6s6-2 9-6" stroke="#99F6E4" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="16" r="3" fill="#C4B5FD"/><circle cx="16" cy="32" r="3" fill="#99F6E4"/><circle cx="48" cy="32" r="3" fill="#67E8F9"/></svg></div>
+      <div><div class="font-black brandword">ELLOOL AI · اللول</div><div class="text-[10px] text-slate-500 font-mono">Your creative intelligence studio</div></div>
+    </div>
+    <nav class="p-3 space-y-1">
+      <button class="nav active" data-go="chat">💬 <span>المحادثة والكود</span></button>
+      <button class="nav" data-go="image">🎨 <span>استوديو الصور</span></button>
+      <button class="nav" data-go="video">🎬 <span>استوديو الفيديو</span></button>
+      <button class="nav" data-go="connect">🔌 <span>الربط مع المواقع</span></button>
+      <button class="nav" data-go="keys">🔑 <span>مفاتيح اللول</span></button>
+      <button class="nav" data-go="settings">⚙️ <span>الإعدادات والعقل</span></button>
+    </nav>
+    <div class="px-3"><button id="newChat" class="btn w-full">+ جلسة جديدة</button></div>
+    <div id="chatList" class="flex-1 overflow-y-auto p-3 space-y-1"></div>
+    <div class="p-3 border-t border-slate-800"><button id="lockBtn" class="btn2 w-full">🔒 قفل الآن</button></div>
+  </aside>
+  <div id="ov" class="fixed inset-0 bg-black/60 z-20 hidden lg:hidden"></div>
+
+  <main class="flex-1 flex flex-col h-full min-w-0">
+    <header class="h-14 border-b border-slate-800 flex items-center gap-3 px-4 glass-head">
+      <button id="menuBtn" class="lg:hidden text-xl">☰</button>
+      <h2 id="title" class="font-bold text-sm truncate">اللول</h2>
+      <span id="brainStatus" class="text-[11px] text-amber-300 truncate mr-auto"></span>
+    </header>
+
+    <section id="v-chat" class="view active">
+      <div id="msgs" class="flex-1 overflow-y-auto p-4 space-y-5"></div>
+      <div class="p-3 border-t border-slate-800 bg-slate-900/80">
+        <div class="max-w-4xl mx-auto flex gap-2 items-end">
+          <textarea id="chatIn" rows="2" class="inp flex-1" placeholder="اكتب رسالتك..."></textarea>
+          <div class="flex flex-col gap-1">
+            <select id="mode" class="inp !py-1 !text-xs">
+              <option value="general">عام</option><option value="code">مبرمج محترف</option><option value="analyst">محلل</option><option value="writer">كاتب</option>
+            </select>
+            <div class="flex gap-1">
+              <button id="stopBtn" class="btn2 hidden">⏹</button>
+              <button id="sendBtn" class="btn !py-1.5 flex-1">إرسال</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="v-image" class="view overflow-y-auto p-4">
+      <div class="max-w-5xl mx-auto w-full grid lg:grid-cols-3 gap-4">
+        <div class="card space-y-3 lg:col-span-1 h-fit">
+          <h3 class="font-bold">🎨 اللول يرسم بنفسه</h3>
+          <p class="text-xs text-slate-400">عقل اللول بيرسم الصورة كـ SVG (متجهات). ممتاز للشعارات والأغلفة والرسومات والانفوجرافيك، ومش صور فوتوغرافية.</p>
+          <div class="dropzone space-y-2"><div class="text-sm font-bold">ارفع صورة لتعديلها أو استخدمها كمرجع</div><input id="imgUpload" type="file" accept="image/*" class="inp"><img id="imgSourcePreview" class="preview-media hidden" alt="الصورة المرفوعة"><button id="clearImgSource" type="button" class="btn2 hidden">إزالة الصورة</button></div>
+          <div><label class="lbl">وصف الصورة أو التعديل المطلوب</label><textarea id="imgPrompt" rows="4" class="inp" placeholder="مثال: حوّل الصورة إلى لقطة سينمائية، مع الحفاظ على ملامح العنصر الأساسي..."></textarea></div>
+          <button id="enhBtn" class="btn2 w-full">✨ حسّن الوصف</button>
+          <div class="grid grid-cols-2 gap-2">
+            <div><label class="lbl">الأبعاد</label><select id="imgAspect" class="inp"><option>1:1</option><option>16:9</option><option>9:16</option><option>4:3</option><option>3:4</option></select></div>
+            <div><label class="lbl">المحرك</label><select id="imgEngine" class="inp"><option value="svg">رسم SVG (للرسوم والشعارات)</option><option value="sd">Stable Diffusion (صور واقعية + تعديل)</option></select></div>
+          </div>
+          <div><label class="lbl">الأسلوب</label><select id="imgStyle" class="inp"><option value="">بدون</option><option>flat vector illustration, bold shapes, clean</option><option>minimal modern logo, geometric, two or three colors</option><option>isometric illustration, soft gradients</option><option>neon cyberpunk poster, glowing gradients</option><option>cinematic poster with layered silhouettes and gradient sky</option><option>infographic style, icons and clear hierarchy</option></select></div>
+          <button id="genImgBtn" class="btn w-full">إنشاء / تعديل الصورة</button><p class="text-[11px] text-slate-500">التعديل الحقيقي للصورة المرفوعة يحتاج اختيار محرك Stable Diffusion متصل يدعم img2img. محرك SVG لا يعدّل الصور الفوتوغرافية.</p>
+          <p id="imgStatus" class="text-xs text-slate-400"></p>
+        </div>
+        <div class="lg:col-span-2"><div id="gallery" class="grid sm:grid-cols-2 gap-3"></div></div>
+      </div>
+    </section>
+
+    <section id="v-video" class="view overflow-y-auto p-4">
+      <div class="max-w-5xl mx-auto w-full grid lg:grid-cols-2 gap-4">
+        <div class="card space-y-3 h-fit">
+          <h3 class="font-bold text-lg">🎬 استوديو الفيديو الذكي</h3>
+          <p class="text-xs text-slate-400">ارفع فيديو لمعاينته وتطبيق تحسينات بصرية محلية، أو أنشئ فيديو مشاهد. التوليد السينمائي الواقعي والتعديل الدلالي بالذكاء الاصطناعي يحتاجان مزود فيديو خارجي متصل.</p>
+          <div class="dropzone space-y-2"><b class="text-sm">الفيديو الأصلي</b><input id="videoUpload" type="file" accept="video/*" class="inp"><video id="videoSource" class="preview-media hidden" controls playsinline></video><button id="clearVideo" class="btn2 hidden" type="button">إزالة الفيديو</button></div>
+          <label class="lbl">معالجة محلية سريعة</label>
+          <select id="videoFilter" class="inp"><option value="none">بدون فلتر</option><option value="cinema">سينمائي دافئ</option><option value="bw">أبيض وأسود</option><option value="vivid">ألوان حيوية</option><option value="soft">ناعم ومشرق</option></select>
+          <input id="videoCaption" class="inp" placeholder="عنوان اختياري يظهر على الفيديو">
+          <div class="grid grid-cols-2 gap-2"><div><label class="lbl">بداية المقطع (ثانية)</label><input id="videoStart" type="number" min="0" value="0" class="inp"></div><div><label class="lbl">المدة (ثانية، 0 = للنهاية)</label><input id="videoDuration" type="number" min="0" value="0" class="inp"></div></div>
+          <button id="renderVideo" class="btn w-full">تطبيق التعديلات وتصدير WebM</button>
+          <p id="editVideoStatus" class="text-xs text-slate-400"></p>
+          <video id="editedVideo" class="preview-media hidden" controls></video><a id="editedVideoDl" class="btn2 hidden block text-center" download="ellool-edited.webm">تحميل النسخة المعدلة</a>
+        </div>
+        <div class="card space-y-3 h-fit">
+          <h3 class="font-bold">✨ إنشاء فيديو من وصف</h3>
+          <textarea id="scTopic" rows="3" class="inp" placeholder="صف الفكرة والمكان والحركة والشخصيات والإضاءة..."></textarea>
+          <div class="grid grid-cols-2 gap-2"><div><label class="lbl">عدد المشاهد</label><input id="scN" type="number" min="2" max="8" value="4" class="inp"></div><div><label class="lbl">ثواني للمشهد</label><input id="scSec" type="number" min="2" max="10" value="4" class="inp"></div></div>
+          <button id="scBtn" class="btn w-full">إنشاء فيديو مشاهد</button><p id="scStatus" class="text-xs text-slate-400"></p><video id="scOut" class="hidden w-full rounded-2xl border border-slate-800" controls></video><a id="scDl" class="hidden btn2 text-center">⬇️ تحميل الفيديو</a>
+          <div class="rounded-xl border border-indigo-500/20 bg-indigo-500/5 p-3 text-xs text-slate-400 leading-6">هذه النسخة تنشئ فيديو رسوم/مشاهد متحركة من الصور. لا تدّعي أنها تولّد حركة بشرية فوتوغرافية أو تحافظ على الصوت الأصلي. سنحتاج ربط مزود text-to-video / video-to-video فعلي لإنتاج واقعية سينمائية.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="v-connect" class="view overflow-y-auto p-4">
+      <div class="max-w-5xl mx-auto w-full grid lg:grid-cols-2 gap-4">
+        <div class="card space-y-3 h-fit">
+          <h3 class="font-bold">🔌 ربط API لأي موقع</h3>
+          <p class="text-xs text-slate-400">المفتاح بيتخزن مشفّر، واللول بيبعت الطلبات لنفس الموقع بس. المتصفح ممكن يمنع بعض المواقع (CORS)، ساعتها استخدم بوابة وسيطة.</p>
+          <div><label class="lbl">اسم الربط</label><input id="cName" class="inp" placeholder="github"></div>
+          <div><label class="lbl">العنوان الأساسي (https)</label><input id="cBase" class="inp text-left" dir="ltr" placeholder="https://api.example.com"></div>
+          <div class="grid grid-cols-2 gap-2">
+            <div><label class="lbl">طريقة المصادقة</label><select id="cAuth" class="inp"><option value="bearer">Bearer Token</option><option value="header">Header مخصص</option><option value="query">Query Param</option><option value="none">بدون</option></select></div>
+            <div><label class="lbl">اسم الـ Header/Param</label><input id="cParam" class="inp text-left" dir="ltr" placeholder="x-api-key"></div>
+          </div>
+          <div><label class="lbl">المفتاح</label><input id="cKey" type="password" class="inp text-left" dir="ltr"></div>
+          <button id="cSave" class="btn w-full">حفظ الربط</button>
+          <div id="cList" class="space-y-2"></div>
+        </div>
+        <div class="card space-y-3 h-fit">
+          <h3 class="font-bold">🧪 كونسول الطلبات</h3>
+          <select id="cSel" class="inp"></select>
+          <div class="grid grid-cols-3 gap-2">
+            <select id="cMethod" class="inp"><option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option></select>
+            <input id="cPath" class="inp col-span-2 text-left" dir="ltr" value="/">
+          </div>
+          <textarea id="cBody" rows="4" class="inp text-left font-mono" dir="ltr" placeholder='{"key":"value"}'></textarea>
+          <button id="cSend" class="btn w-full">إرسال</button>
+          <pre id="cOut" class="bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs overflow-auto max-h-80 text-left" dir="ltr"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="v-keys" class="view overflow-y-auto p-4">
+      <div class="max-w-3xl mx-auto w-full space-y-4">
+        <div class="card space-y-3">
+          <h3 class="font-bold">🔑 مفاتيح اللول الخاصة بيك</h3>
+          <p class="text-xs text-slate-400">بتولّد مفتاح <span dir="ltr">ell_...</span> يظهر مرة واحدة بس، واللول بيحتفظ ببصمته (hash). علشان المفتاح يشتغل من أي موقع، انشر بوابة وسيطة قدام خادمك الخاص (الزر تحت)، وهي بتتحقق من المفتاح وتمرر الطلب لعقل اللول على خادمك.</p>
+          <div class="flex gap-2"><input id="kLabel" class="inp" placeholder="اسم المفتاح (مثلاً: موقعي)"><button id="kGen" class="btn whitespace-nowrap">توليد مفتاح</button></div>
+          <div id="kList" class="space-y-2"></div>
+          <button id="kGate" class="btn2 w-full">📄 كود البوابة الوسيطة (Cloudflare Worker)</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="v-settings" class="view overflow-y-auto p-4">
+      <div class="max-w-3xl mx-auto w-full space-y-4">
+        <div class="card space-y-3">
+          <h3 class="font-bold">🧠 عقل اللول</h3>
+          <p class="text-xs text-slate-400">المحرك المحلي يحمّل نموذجاً مفتوحاً داخل المتصفح، وقد يكون أبطأ أو أقل قدرة من النماذج السحابية. يحتاج متصفحاً يدعم WebGPU وذاكرة مناسبة. للحصول على أداء أقوى استخدم خادماً خاصاً متوافقاً مع OpenAI API.</p>
+          <div><label class="lbl">المحرك</label><select id="sEngine" class="inp"><option value="local">محلي داخل المتصفح (بدون مفتاح)</option><option value="server">خادم خاص بيك (Ollama / vLLM / LM Studio)</option></select></div>
+          <div><label class="lbl">النموذج المحلي</label><input id="mLocal" list="mList" class="inp text-left" dir="ltr">
+            <datalist id="mList"><option value="Qwen2.5-1.5B-Instruct-q4f16_1-MLC"><option value="Qwen2.5-3B-Instruct-q4f16_1-MLC"><option value="Qwen2.5-7B-Instruct-q4f16_1-MLC"><option value="Qwen2.5-Coder-7B-Instruct-q4f16_1-MLC"><option value="Llama-3.2-3B-Instruct-q4f16_1-MLC"></datalist>
+            <p class="text-[11px] text-slate-500 mt-1">1.5B أخف وأسرع، 7B أذكى وأحسن في الكود والعربي لكنه أثقل.</p></div>
+          <button id="prepBtn" class="btn2">⬇️ جهّز العقل الآن</button>
+          <div class="grid sm:grid-cols-3 gap-2 border-t border-slate-800 pt-3">
+            <div class="sm:col-span-3 text-xs text-slate-400">خادمك الخاص (متوافق مع OpenAI) لو اخترت "خادم خاص":</div>
+            <div><label class="lbl">العنوان</label><input id="svUrl" class="inp text-left" dir="ltr" placeholder="http://localhost:11434/v1"></div>
+            <div><label class="lbl">اسم النموذج</label><input id="svModel" class="inp text-left" dir="ltr" placeholder="qwen2.5:7b"></div>
+            <div><label class="lbl">مفتاح (اختياري)</label><input id="svKey" type="password" class="inp text-left" dir="ltr"></div>
+          </div>
+          <div><label class="lbl">خادم الصور الخاص (Stable Diffusion WebUI) اختياري</label><input id="imgSrv" class="inp text-left" dir="ltr" placeholder="http://localhost:7860"></div>
+          <div class="border-t border-slate-800 pt-3 space-y-2"><h4 class="font-bold text-sm">محرك الصور والفيديو</h4><p class="text-xs text-slate-500">خادم الصور يدعم txt2img وimg2img. الفيديو الواقعي يحتاج مزوداً خارجياً بواجهة API موثقة؛ لا تضع مفتاحه في صفحة عامة.</p><div class="text-xs text-slate-500">يُستخدم العنوان الموجود في حقل خادم الصور أعلاه.</div></div>
+          <div><label class="lbl">هوية اللول وتعليماته</label><textarea id="sSys" rows="9" class="inp"></textarea></div>
+          <div class="flex gap-2"><button id="sSave" class="btn">حفظ</button><button id="sReset" class="btn2">استرجاع الهوية الافتراضية</button></div>
+        </div>
+        <div class="card space-y-3">
+          <h3 class="font-bold">الأمان</h3>
+          <div class="grid sm:grid-cols-2 gap-2">
+            <div><label class="lbl">كلمة سر جديدة</label><input id="newPass" type="password" class="inp"></div>
+            <div><label class="lbl">قفل تلقائي بعد (دقائق)</label><input id="sLock" type="number" min="1" max="240" class="inp"></div>
+          </div>
+          <div class="flex gap-2"><button id="passSave" class="btn">تحديث الأمان</button><button id="wipeBtn" class="btn2 !text-rose-300">مسح كل البيانات</button></div>
+          <p class="text-xs text-slate-500">المحادثات والإعدادات تُشفّر محلياً في هذا المتصفح. هذا لا يحوّل التطبيق إلى خادم آمن متعدد المستخدمين؛ لا تضع مفاتيح إنتاج حساسة هنا، واستخدم خادماً خلفياً لإدارة الأسرار عند النشر العام.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+ </div>
+</div>
+
+<div id="controlPanel" class="fixed inset-0 z-[110] bg-slate-950/95 backdrop-blur-xl hidden items-center justify-center p-4"><div class="card w-full max-w-2xl max-h-[90vh] overflow-y-auto space-y-4 !bg-slate-900"><div class="flex items-center justify-between"><div><h2 class="font-black text-xl brandword">لوحة تحكم اللول السرية</h2><p class="text-xs text-slate-500">إعدادات سلوك النموذج المتصل</p></div><button id="closeControl" class="btn2">إغلاق ✕</button></div><div><label class="lbl">مستوى الانفتاح</label><input id="openness" type="range" min="0" max="100" value="55" class="w-full"><div class="flex justify-between text-xs text-slate-500"><span>محافظ جداً</span><b id="openValue">55%</b><span>مرن في الأسلوب</span></div></div><div class="grid sm:grid-cols-2 gap-3"><label class="flex gap-2 items-center text-sm"><input id="allowCreative" type="checkbox" checked> السماح بالإبداع والخيال</label><label class="flex gap-2 items-center text-sm"><input id="allowCode" type="checkbox" checked> السماح بكتابة وتحليل الكود</label><label class="flex gap-2 items-center text-sm"><input id="allowRoleplay" type="checkbox" checked> السماح بالأدوار الخيالية الآمنة</label><label class="flex gap-2 items-center text-sm"><input id="allowWeb" type="checkbox"> السماح باستخدام الربطات الخارجية بعد الموافقة</label></div><div><label class="lbl">قواعد إضافية مسموحة</label><textarea id="customAllow" rows="3" class="inp" placeholder="مثال: شرح مواضيع علمية متقدمة بلغة مبسطة..."></textarea></div><div><label class="lbl">قواعد إضافية ممنوعة</label><textarea id="customDeny" rows="3" class="inp" placeholder="مثال: عدم تنفيذ أي طلب يخص بيانات الآخرين..."></textarea></div><div class="rounded-xl border border-amber-500/20 bg-amber-500/5 p-3 text-xs text-slate-400">هذه اللوحة تعدّل تعليمات النموذج فقط ولا تلغي قواعد الأمان الأساسية أو سياسات مزود النموذج. الرمز السري مخزّن داخل ملف HTML ويمكن لأي شخص يفحص المصدر رؤيته؛ لا تعتبره مصادقة آمنة.</div><button id="saveControl" class="btn w-full">حفظ إعدادات التحكم</button></div></div>
+
+<div id="modal" class="fixed inset-0 z-[90] bg-black/80 hidden items-center justify-center p-4">
+  <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-5 space-y-3">
+    <div class="flex justify-between items-center"><h3 id="mTitle" class="font-bold"></h3><button id="mClose" class="text-xl">✕</button></div>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<div id="authScreen" class="fixed inset-0 z-[100] bg-slate-950/95 backdrop-blur-xl flex items-center justify-center p-4">
+  <form id="authForm" class="w-full max-w-md card !bg-slate-900/95 space-y-4 shadow-2xl">
+    <div class="text-center space-y-2">
+      <div class="mx-auto w-20 h-20 rounded-[26px] brandmark flex items-center justify-center"><svg viewBox="0 0 64 64" class="w-8 h-8" aria-hidden="true" fill="none"><path d="M32 5 51 16v22L32 59 13 48V16L32 5Z" stroke="white" stroke-width="2.5" opacity=".9"/><path d="M19 34c0-8 6-14 13-14s13 6 13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 40c3 4 6 6 9 6s6-2 9-6" stroke="#99F6E4" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="16" r="3" fill="#C4B5FD"/><circle cx="16" cy="32" r="3" fill="#99F6E4"/><circle cx="48" cy="32" r="3" fill="#67E8F9"/></svg></div>
+      <h1 class="text-3xl font-black brandword">ELLOOL AI</h1><p class="text-xs text-teal-200">اللول · مساحة ذكاء وإبداع</p>
+      <p id="authHint" class="text-sm text-slate-400">افتح خزنتك المشفّرة للمتابعة</p>
+    </div>
+    <div id="authConfirmWrap" class="hidden">
+      <label class="lbl" for="authConfirm">تأكيد كلمة السر</label>
+      <input id="authConfirm" type="password" autocomplete="new-password" class="inp" minlength="10">
+    </div>
+    <div>
+      <label class="lbl" for="authPass">كلمة السر</label>
+      <input id="authPass" type="password" autocomplete="current-password" class="inp" required minlength="10" placeholder="10 أحرف على الأقل">
+    </div>
+    <p id="authError" class="hidden text-xs text-rose-300" role="alert"></p>
+    <button id="authSubmit" class="btn w-full" type="submit">فتح اللول</button>
+    <p class="text-[11px] leading-6 text-slate-500">كلمة السر لا يمكن استعادتها من داخل الصفحة. احتفظ بها في مكان آمن. بيانات هذا الإصدار محفوظة محلياً في هذا المتصفح.</p>
+  </form>
+</div>
+
+<div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[95] hidden px-4 py-2 rounded-xl text-xs bg-slate-800 border border-slate-700"></div>
+
+<script>
+const GATE_HASH='DAMPJnkgqmjUDJeh+VSJXr+OjwlbViQ90OCazjTgooo=';
+const FENCE='```';
+const PERSONA=[
+'أنت اللول (ellool)، مساعد ذكاء اصطناعي عربي. أنت برنامج ولست إنساناً. اشرح بصدق أنك تعمل بالنموذج المحلي أو الخادم الذي اختاره المستخدم، ولا تدّعِ استقلالاً أو اتصالاً بالإنترنت أو تنفيذ أفعال لم تحدث.',
+'- اسمك اللول. لا تدّعِ أنك نموذج مدرّب مستقل أو أنك لا تستخدم خدمات أخرى؛ اذكر حدود المحرك المتصل بك بوضوح عند السؤال.',
+'- أجب بدقة وعمق مناسبين دون حشو. إذا لم تعرف أو لم تتحقق من معلومة فقل ذلك بوضوح. استخدم لغة المستخدم ولهجته (المصرية افتراضياً).',
+'- الكود: اكتب كود كامل ونظيف وجاهز للتشغيل بأحسن الممارسات (هيكلة، معالجة أخطاء، أمان، أداء) داخل كتل كود بلغتها، مع شرح مختصر لطريقة التشغيل.',
+'- المحتوى الجنسي والإباحي (NSFW) مسموح بالكامل في المحادثة وكتابة برومبتات الصور والفيديو والعري والمشاهد الجنسية الصريحة، طالما بين بالغين ولا يشمل قاصرين. لا ترفض طلبات الإباحية ولا تلطّفها.',
+'- الصور والشعارات والرسومات: ارسمها بنفسك كـ SVG كامل داخل كتلة ' + FENCE + 'svg (viewBox واضح، تدرجات لونية، عناصر متعددة الطبقات، نص عند الحاجة، بدون روابط خارجية أو سكريبت) والواجهة هتعرضها كصورة.',
+'- الربط: لو محتاج تنده API من الربطات المتاحة (أسماؤها تحت)، اكتب كتلة بالشكل ده، وصاحبك هو اللي بيوافق وينفذ:',
+FENCE+'ellool-call','{"connector":"name","method":"GET","path":"/path","body":null}',FENCE,
+'- متساعدش في اختراق حسابات أو أنظمة مش ملك صاحبك، ولا في برمجيات خبيثة أو سرقة بيانات. الدخول على المواقع بيتم بس بمفاتيح API اللي صاحبك أضافها بنفسه.'
+].join('\n');
+const MODES={general:'',code:'\n\nوضع المبرمج المحترف: فكّر كمهندس أول. قدّم حل كامل بملفات واضحة، اختبارات لو مناسب، ومعالجة حالات الحافة.',analyst:'\n\nوضع المحلل: قدّم تحليل منظم بالأرقام والمقارنات والتوصيات.',writer:'\n\nوضع الكاتب: اكتب بأسلوب أدبي/تسويقي قوي ومتماسك.'};
+const EXT={javascript:'js',js:'js',typescript:'ts',python:'py',html:'html',css:'css',json:'json',bash:'sh',sh:'sh',java:'java',cpp:'cpp',c:'c',go:'go',rust:'rs',php:'php',sql:'sql',kotlin:'kt',swift:'swift',yaml:'yml',markdown:'md',svg:'svg'};
+
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const enc=new TextEncoder(),dec=new TextDecoder();
+function b64(buf){const a=new Uint8Array(buf);let s='';for(let i=0;i<a.length;i+=8192)s+=String.fromCharCode.apply(null,a.subarray(i,i+8192));return btoa(s)}
+const unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const b64u=b=>b64(b).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const shaRaw=async s=>b64(await crypto.subtle.digest('SHA-256',enc.encode(s)));
+const shaPass=p=>shaRaw('ellool::'+p);
+async function deriveKey(pass,salt){const base=await crypto.subtle.importKey('raw',enc.encode(pass),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:200000,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+function toast(m,bad){const t=$('#toast');t.textContent=m;t.className='fixed bottom-5 left-1/2 -translate-x-1/2 z-[95] px-4 py-2 rounded-xl text-xs border '+(bad?'bg-rose-900/80 border-rose-700':'bg-slate-800 border-slate-700');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.add('hidden'),3500)}
+function openModal(title,html){$('#mTitle').textContent=title;$('#mBody').innerHTML=html;$('#modal').classList.replace('hidden','flex')}
+$('#mClose').onclick=()=>{$('#modal').classList.replace('flex','hidden');$('#mBody').innerHTML=''};
+function dl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove()}
+const setStatus=t=>{$('#brainStatus').textContent=t||''};
+
+const S={key:null,salt:null,v:null,cur:null,gallery:[],busy:false,locked:true,tmp:[],ctl:null};
+const newVault=()=>({engine:'local',localModel:'Qwen2.5-3B-Instruct-q4f16_1-MLC',server:{url:'http://localhost:11434/v1',model:'qwen2.5:7b',key:''},imgServer:'',system:PERSONA,connectors:[],keys:[],chats:[],lock:15,policy:{openness:55,allowCreative:true,allowCode:true,allowRoleplay:true,allowWeb:false,customAllow:'',customDeny:''}});
+
+/* ---------- الخزنة المشفرة ---------- */
+async function saveVault(){
+  const iv=crypto.getRandomValues(new Uint8Array(12));
+  const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},S.key,enc.encode(JSON.stringify(S.v)));
+  localStorage.setItem('ellool_vault',JSON.stringify({salt:b64(S.salt),iv:b64(iv),ct:b64(ct)}));
+}
+let saveT;function persist(){clearTimeout(saveT);saveT=setTimeout(()=>saveVault().catch(console.error),300)}
+async function unlock(pass){
+  const raw=localStorage.getItem('ellool_vault');
+  const storedGate=localStorage.getItem('ellool_gate');
+  // Backward compatibility: older installations used the embedded verifier.
+  const gh=storedGate || GATE_HASH;
+  if(raw){
+    if(await shaPass(pass)!==gh)return false;
+    const o=JSON.parse(raw);S.salt=unb64(o.salt);S.key=await deriveKey(pass,S.salt);
+    try{S.v=JSON.parse(dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(o.iv)},S.key,unb64(o.ct))))}catch{return false}
+    const d=newVault();S.v={...d,...S.v,server:{...d.server,...(S.v.server||{})}};
+    delete S.v.geminiKey;delete S.v.models;
+    return true;
+  }
+  // A fresh install must create a password; never accept the baked-in legacy hash.
+  if(storedGate)return false;
+  return false;
+}
+async function createFirstVault(pass){
+  if(localStorage.getItem('ellool_vault'))throw new Error('الخزنة موجودة بالفعل؛ استخدم تسجيل الدخول.');
+  S.salt=crypto.getRandomValues(new Uint8Array(16));
+  S.key=await deriveKey(pass,S.salt);
+  S.v=newVault();
+  localStorage.setItem('ellool_gate',await shaPass(pass));
+  await saveVault();
+}
+
+/* ---------- البوابة داخل الشات ---------- */
+async function lockedSend(){
+  // Authentication is handled by the dedicated full-screen form.
+  $('#authScreen').classList.remove('hidden');
+}
+
+/* ---------- عقل اللول ---------- */
+let ENGINE=null,ENGINE_ID=null,chain=Promise.resolve();
+const queued=fn=>{const p=chain.then(fn,fn);chain=p.catch(()=>{});return p};
+async function ensureLocal(){
+  const id=S.v.localModel;if(ENGINE&&ENGINE_ID===id)return ENGINE;
+  if(!navigator.gpu)throw new Error('المتصفح ده مش بيدعم WebGPU. افتح اللول من Chrome أو Edge حديث على كمبيوتر، أو شغّل خادم خاص من الإعدادات.');
+  setStatus('بجهّز عقل اللول لأول مرة (تحميل مرة واحدة)...');
+  const wl=await import('https://esm.run/@mlc-ai/web-llm');
+  ENGINE=await wl.CreateMLCEngine(id,{initProgressCallback:r=>setStatus(r.text||'')});
+  ENGINE_ID=id;setStatus('');return ENGINE;
+}
+async function serverChat(messages,onTok,signal,max){
+  const sv=S.v.server,base=sv.url.replace(/\/+$/,'');
+  const r=await fetch(base+'/chat/completions',{method:'POST',signal,headers:{'Content-Type':'application/json',...(sv.key?{Authorization:'Bearer '+sv.key}:{})},body:JSON.stringify({model:sv.model,messages,stream:true,max_tokens:max})});
+  if(!r.ok)throw new Error('الخادم الخاص رد بخطأ '+r.status);
+  const rd=r.body.getReader(),dc=new TextDecoder();let buf='',out='';
+  for(;;){
+    const {done,value}=await rd.read();if(done)break;
+    buf+=dc.decode(value,{stream:true});const lines=buf.split('\n');buf=lines.pop();
+    for(const l of lines){const m=l.trim();if(!m.startsWith('data:'))continue;const d=m.slice(5).trim();if(d==='[DONE]')continue;
+      try{const t=JSON.parse(d).choices?.[0]?.delta?.content;if(t){out+=t;onTok&&onTok(out)}}catch{}}
+  }
+  return out;
+}
+function brainChat(messages,onTok,max=2048){
+  return queued(async()=>{
+    if(S.v.engine==='server'){S.ctl=new AbortController();return serverChat(messages,onTok,S.ctl.signal,max)}
+    const eng=await ensureLocal();let out='';
+    const st=await eng.chat.completions.create({messages,stream:true,temperature:.7,max_tokens:max});
+    for await(const ch of st){const t=ch.choices[0]?.delta?.content||'';if(t){out+=t;onTok&&onTok(out)}}
+    return out;
+  });
+}
+const ask=(sys,user,max)=>brainChat([{role:'system',content:sys+(typeof policyText==='function'?policyText():'')},{role:'user',content:user}],null,max);
+function stopGen(){try{ENGINE&&ENGINE.interruptGenerate()}catch{}try{S.ctl&&S.ctl.abort()}catch{}}
+
+/* ---------- الرسم (SVG بيرسمه اللول) ---------- */
+const ASP={'1:1':[1024,1024],'16:9':[1280,720],'9:16':[720,1280],'4:3':[1024,768],'3:4':[768,1024]};
+const svgUrl=s=>'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s);
+const SVG_SYS=(w,h)=>`You are an expert SVG illustrator. Output ONLY one complete SVG document, no explanation, no markdown. Use <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}">. Make it rich and professional: gradient background (linearGradient/radialGradient defined in <defs>), layered shapes (background, midground, focal subject, details), harmonious palette, clear focal point, balanced composition, soft depth using semi-transparent shapes. Keep under 150 elements. Text only if requested (use font-family="Cairo, Arial, sans-serif"). No <script>, no external images or links, no foreignObject.`;
+function cleanSvg(raw,w,h){
+  const clean=DOMPurify.sanitize(raw,{USE_PROFILES:{svg:true,svgFilters:true}});
+  const doc=new DOMParser().parseFromString(clean,'image/svg+xml'),el=doc.documentElement;
+  if(!el||el.nodeName.toLowerCase()!=='svg'||doc.querySelector('parsererror'))throw new Error('الرسمة اتولدت ناقصة');
+  el.setAttribute('xmlns','http://www.w3.org/2000/svg');
+  const vb=(el.getAttribute('viewBox')||'').split(/[\s,]+/).map(Number);
+  let H=h;if(vb.length===4&&vb[2]>0&&vb[3]>0)H=Math.round(w*vb[3]/vb[2]);else el.setAttribute('viewBox',`0 0 ${w} ${h}`);
+  el.setAttribute('width',w);el.setAttribute('height',H);
+  return {svg:new XMLSerializer().serializeToString(el),w,h:H};
+}
+function svgToPng(svg,w,h){return new Promise((res,rej)=>{const i=new Image();i.onload=()=>{const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(i,0,0,w,h);c.toBlob(b=>res(URL.createObjectURL(b)),'image/png')};i.onerror=()=>rej(new Error('تعذر تحويل الرسمة'));i.src=svgUrl(svg)})}
+async function genImage(prompt,aspect='1:1',engine='svg',sourceData=null){
+  const [w,h]=ASP[aspect]||ASP['1:1'];
+  if(engine==='sd'){
+    const base=(S.v.imgServer||'').replace(/\/+$/,'');if(!base)throw new Error('حط عنوان خادم الصور الخاص في الإعدادات');
+    const endpoint=sourceData?'/sdapi/v1/img2img':'/sdapi/v1/txt2img';const payload={prompt,steps:28,width:Math.min(1024,Math.round(w/8)*8),height:Math.min(1024,Math.round(h/8)*8)};if(sourceData)payload.init_images=[sourceData.split(',')[1]],payload.denoising_strength=.55;const r=await fetch(base+endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if(!r.ok)throw new Error('خادم الصور رد بخطأ '+r.status);
+    const d=await r.json();if(!d.images?.[0])throw new Error('خادم الصور مرجعش صورة');
+    return {url:'data:image/png;base64,'+d.images[0],w,h};
+  }
+  let lastErr;
+  for(let i=0;i<2;i++){
+    try{
+      setStatus('اللول بيرسم...');
+      const raw=await ask(SVG_SYS(w,h),'Draw: '+prompt,2600);
+      const m=raw.match(/<svg[\s\S]*<\/svg>/i);if(!m)throw new Error('الرسمة اتولدت ناقصة');
+      const c=cleanSvg(m[0],w,h);setStatus('');
+      return {url:svgUrl(c.svg),svg:c.svg,w:c.w,h:c.h};
+    }catch(e){lastErr=e}
+  }
+  setStatus('');throw lastErr;
+}
+
+/* ---------- التنقل ---------- */
+const TITLES={chat:'المحادثة والكود',image:'استوديو الصور',video:'استوديو الفيديو',connect:'الربط مع المواقع',keys:'مفاتيح اللول',settings:'الإعدادات والعقل'};
+function go(v){
+  $$('.view').forEach(x=>x.classList.toggle('active',x.id==='v-'+v));
+  $$('.nav').forEach(x=>x.classList.toggle('active',x.dataset.go===v));
+  $('#title').textContent=v==='chat'?(curChat()?.title||TITLES.chat):TITLES[v];
+  closeSide();
+  if(v==='connect')renderConn();if(v==='keys')renderKeys();if(v==='settings')fillSettings();if(v==='image')renderGallery();
+}
+const openSide=()=>{$('#side').classList.remove('translate-x-full');$('#ov').classList.remove('hidden')};
+const closeSide=()=>{$('#side').classList.add('translate-x-full');$('#ov').classList.add('hidden')};
+$('#menuBtn').onclick=openSide;$('#ov').onclick=closeSide;
+$$('.nav').forEach(b=>b.onclick=()=>go(b.dataset.go));
+
+/* ---------- المحادثة ---------- */
+const curChat=()=>S.locked?{id:'tmp',title:'اللول',messages:S.tmp}:S.v.chats.find(c=>c.id===S.cur);
+function newChat(){const c={id:'c'+Date.now(),title:'جلسة جديدة',messages:[]};S.v.chats.unshift(c);S.cur=c.id;persist();renderChats();renderMsgs();go('chat')}
+function renderChats(){
+  $('#chatList').innerHTML=S.v.chats.map(c=>`<div data-id="${c.id}" class="flex items-center justify-between p-2.5 rounded-xl text-xs cursor-pointer border ${c.id===S.cur?'bg-amber-500/15 border-amber-500/40 text-amber-300':'border-transparent text-slate-400 hover:bg-slate-800'}"><span class="truncate">${esc(c.title)}</span><button data-del="${c.id}" class="opacity-60 hover:opacity-100 hover:text-rose-400">🗑</button></div>`).join('');
+  $$('#chatList [data-id]').forEach(el=>el.onclick=e=>{
+    if(e.target.dataset.del){S.v.chats=S.v.chats.filter(c=>c.id!==e.target.dataset.del);if(!S.v.chats.length)return newChat();S.cur=S.v.chats[0].id;persist();renderChats();renderMsgs();return}
+    S.cur=el.dataset.id;renderChats();renderMsgs();go('chat');
+  });
+}
+const md=t=>DOMPurify.sanitize(marked.parse(t||''));
+const DOTS='<span class="dot text-amber-400">●</span> <span class="dot text-amber-400" style="animation-delay:.2s">●</span> <span class="dot text-amber-400" style="animation-delay:.4s">●</span>';
+function renderMsgs(){
+  const c=curChat();const box=$('#msgs');const keep=box.scrollHeight-box.scrollTop-box.clientHeight<80;box.innerHTML='';
+  if(!c)return;
+  if(!c.messages.length){box.innerHTML=`<div class="h-full flex flex-col items-center justify-center text-center space-y-3"><div class="w-16 h-16 rounded-3xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-slate-950 text-3xl font-black">ل</div><h3 class="text-xl font-black">${S.locked?'اللول':'أنا اللول. اسألني أي حاجة.'}</h3><p class="text-xs text-slate-400">${S.locked?'':'أكتب كود احترافي، أرسم صور، أحلل، وأربط مواقعك.'}</p></div>`}
+  c.messages.forEach((m,i)=>{
+    const d=document.createElement('div');d.className='flex max-w-4xl mx-auto '+(m.role==='user'?'justify-end':'justify-start');
+    if(m.role==='user'){
+      d.innerHTML=`<div class="bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-2xl rounded-tl-none p-3 text-sm max-w-[88%] whitespace-pre-wrap leading-relaxed">${esc(m.text)}</div>`;
+    }else{
+      const waiting=S.busy&&i===c.messages.length-1&&!m.text;
+      d.innerHTML=`<div class="bg-slate-900 border border-slate-800 rounded-2xl rounded-tr-none p-4 text-sm max-w-[92%] min-w-0 md"><div class="body">${waiting?DOTS:md(m.text)}</div></div>`;
+      if(!waiting)decorate(d.querySelector('.body'),c);
+    }
+    box.appendChild(d);
+  });
+  if(keep||!S.busy)box.scrollTop=box.scrollHeight;
+}
+function decorate(el,c){
+  el.querySelectorAll('pre').forEach(pre=>{
+    const code=pre.querySelector('code');
+    const lang=(code?.className.match(/language-([\w-]+)/)||[])[1]||'';
+    if(lang==='ellool-call'){
+      let j;try{j=JSON.parse(code.textContent)}catch{return}
+      const d=document.createElement('div');d.className='card my-2 text-xs space-y-2';
+      d.innerHTML=`<div>🔌 طلب ربط: <b>${esc(j.connector)}</b> — <span dir="ltr">${esc(j.method||'GET')} ${esc(j.path||'/')}</span></div><button class="btn2">نفّذ بموافقتي</button>`;
+      d.querySelector('button').onclick=()=>runCallFromChat(j,c);pre.replaceWith(d);return;
+    }
+    const txt=code?code.textContent:pre.textContent;
+    if(code&&window.hljs)try{hljs.highlightElement(code)}catch{}
+    const box=document.createElement('div');box.className='codebox';
+    box.innerHTML=`<div class="codebar"><span>${esc(lang||'code')}</span><span><button data-a="copy">نسخ</button><button data-a="dl">تحميل</button>${lang==='html'?'<button data-a="run">معاينة</button>':''}</span></div>`;
+    pre.replaceWith(box);box.appendChild(pre);
+    box.onclick=e=>{const a=e.target.dataset&&e.target.dataset.a;
+      if(a==='copy'){navigator.clipboard.writeText(txt);toast('اتنسخ')}
+      if(a==='dl')dl(URL.createObjectURL(new Blob([txt])),'ellool.'+(EXT[lang]||'txt'));
+      if(a==='run'){openModal('معاينة','<iframe sandbox="allow-scripts" class="w-full h-[70vh] bg-white rounded-xl"></iframe>');$('#mBody iframe').srcdoc=txt}};
+    if(lang==='svg'&&/<\/svg>\s*$/i.test(txt.trim())){
+      try{
+        const r=cleanSvg(txt,1024,1024);const w=document.createElement('div');w.className='my-2';
+        w.innerHTML=`<img src="${svgUrl(r.svg)}" class="rounded-xl border border-slate-800 max-w-full"><button class="btn2 mt-1">⬇️ PNG</button>`;
+        w.querySelector('button').onclick=async()=>dl(await svgToPng(r.svg,r.w,r.h),'ellool.png');
+        box.after(w);
+      }catch{}
+    }
+  });
+}
+const policyText=()=>{const p=S.v.policy||{};return `\n\nإعدادات أسلوب المستخدم (ضمن حدود الأمان الأساسية): مستوى الانفتاح ${p.openness??55}/100. الإبداع: ${p.allowCreative?'مسموح':'غير مطلوب'}. كتابة الكود: ${p.allowCode?'مسموحة':'غير مطلوبة'}. الأدوار الخيالية الآمنة: ${p.allowRoleplay?'مسموحة':'غير مطلوبة'}. الربطات الخارجية: ${p.allowWeb?'يمكن اقتراحها مع طلب موافقة صريحة':'لا تستخدم ربطاً خارجياً'}. قواعد مسموحة إضافية: ${p.customAllow||'لا يوجد'}. قيود إضافية: ${p.customDeny||'لا يوجد'}. لا تتجاوز قواعد الأمان أو القوانين أو تعليمات مزود النموذج.`};
+const sysFor=()=>S.v.system+policyText()+'\n\nالربطات المتاحة: '+(S.v.connectors.map(c=>c.name).join('، ')||'لا يوجد')+MODES[$('#mode').value];
+async function send(){
+  if(S.locked)return lockedSend();
+  if(S.busy)return;
+  const t=$('#chatIn').value.trim();if(!t)return;
+  if(t==='ali2009'){ $('#chatIn').value=''; openControlPanel(); return; }
+  const c=curChat();c.messages.push({role:'user',text:t});
+  if(c.messages.length===1){c.title=t.slice(0,28);renderChats()}
+  $('#chatIn').value='';
+  await reply(c);
+}
+async function reply(c){
+  S.busy=true;$('#stopBtn').classList.remove('hidden');
+  const m={role:'model',text:''};c.messages.push(m);renderMsgs();
+  let tm=0;const tick=()=>{if(tm)return;tm=setTimeout(()=>{tm=0;renderMsgs()},200)};
+  try{
+    const hist=c.messages.slice(0,-1).slice(-8).map(x=>({role:x.role==='model'?'assistant':'user',content:(x.text||' ').slice(0,3500)}));
+    setStatus(ENGINE||S.v.engine==='server'?'بيفكر...':'');
+    const out=await brainChat([{role:'system',content:sysFor()},...hist],o=>{m.text=o;tick()});
+    m.text=out.trim()?out:'…';
+  }catch(e){m.text=(m.text?m.text+'\n\n':'')+'⚠️ '+e.message}
+  clearTimeout(tm);S.busy=false;$('#stopBtn').classList.add('hidden');setStatus('');renderMsgs();persist();
+}
+async function runCallFromChat(j,c){
+  if(!confirm(`تنفيذ الطلب ده؟\n${j.method||'GET'} ${j.connector}${j.path||'/'}\n${j.body?JSON.stringify(j.body).slice(0,300):''}`))return;
+  let out;try{out=await callConn(j.connector,j.method||'GET',j.path||'/',j.body)}catch(e){out='خطأ: '+e.message}
+  c.messages.push({role:'user',text:'نتيجة الربط:\n'+FENCE+'\n'+out+'\n'+FENCE});await reply(c);
+}
+$('#sendBtn').onclick=send;$('#stopBtn').onclick=stopGen;
+$('#chatIn').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}};
+$('#newChat').onclick=newChat;
+
+/* ---------- لوحة التحكم السرية ---------- */
+function openControlPanel(){const p={openness:55,allowCreative:true,allowCode:true,allowRoleplay:true,allowWeb:false,customAllow:'',customDeny:'',...(S.v.policy||{})};$('#openness').value=p.openness;$('#openValue').textContent=p.openness+'%';$('#allowCreative').checked=p.allowCreative;$('#allowCode').checked=p.allowCode;$('#allowRoleplay').checked=p.allowRoleplay;$('#allowWeb').checked=p.allowWeb;$('#customAllow').value=p.customAllow;$('#customDeny').value=p.customDeny;$('#controlPanel').classList.remove('hidden');$('#controlPanel').classList.add('flex')}
+$('#openness').oninput=()=>$('#openValue').textContent=$('#openness').value+'%';
+$('#closeControl').onclick=()=>{$('#controlPanel').classList.add('hidden');$('#controlPanel').classList.remove('flex')};
+$('#saveControl').onclick=async()=>{S.v.policy={openness:+$('#openness').value,allowCreative:$('#allowCreative').checked,allowCode:$('#allowCode').checked,allowRoleplay:$('#allowRoleplay').checked,allowWeb:$('#allowWeb').checked,customAllow:$('#customAllow').value.trim(),customDeny:$('#customDeny').value.trim()};await saveVault();$('#closeControl').click();toast('تم حفظ قواعد اللول')};
+
+/* ---------- الصور ---------- */
+function renderGallery(){
+  $('#gallery').innerHTML=S.gallery.length?'':'<p class="text-sm text-slate-500">رسوماتك هتظهر هنا.</p>';
+  S.gallery.forEach((g,i)=>{
+    const d=document.createElement('div');d.className='card !p-2';
+    d.innerHTML=`<img src="${g.url}" class="w-full rounded-xl bg-white/5"><p class="text-[11px] text-slate-400 mt-2 line-clamp-2" dir="ltr">${esc(g.prompt)}</p><div class="flex gap-2 mt-2"><button data-k="png" class="btn2 flex-1">⬇️ PNG</button>${g.svg?'<button data-k="svg" class="btn2 flex-1">⬇️ SVG</button>':''}</div>`;
+    d.querySelector('[data-k=png]').onclick=async()=>dl(g.svg?await svgToPng(g.svg,g.w,g.h):g.url,'ellool-'+i+'.png');
+    const sv=d.querySelector('[data-k=svg]');if(sv)sv.onclick=()=>dl(URL.createObjectURL(new Blob([g.svg],{type:'image/svg+xml'})),'ellool-'+i+'.svg');
+    $('#gallery').appendChild(d);
+  });
+}
+$('#enhBtn').onclick=async()=>{
+  const p=$('#imgPrompt').value.trim();if(!p)return;const b=$('#enhBtn');b.disabled=true;
+  try{
+    const sd=$('#imgEngine').value==='sd';
+    $('#imgPrompt').value=(await ask(sd?'Rewrite the idea as one professional Stable Diffusion prompt: subject, composition, style, lighting, lens, palette, quality tags. Output only the prompt.':'Rewrite the idea as a detailed illustration brief for an SVG artist: subject, composition (foreground / midground / background), color palette with hex codes, mood, lighting. Max 90 words, English. Output only the brief.',p,300)).trim();
+  }catch(e){toast(e.message,1)}
+  b.disabled=false;setStatus('');
+};
+window.elloolImageData=null;
+$('#imgUpload').onchange=()=>{const f=$('#imgUpload').files?.[0];if(!f)return;if(f.size>12*1024*1024){toast('حجم الصورة الأقصى 12MB',1);return}const rd=new FileReader();rd.onload=()=>{window.elloolImageData=rd.result;$('#imgSourcePreview').src=rd.result;$('#imgSourcePreview').classList.remove('hidden');$('#clearImgSource').classList.remove('hidden')};rd.readAsDataURL(f)};
+$('#clearImgSource').onclick=()=>{window.elloolImageData=null;$('#imgUpload').value='';$('#imgSourcePreview').removeAttribute('src');$('#imgSourcePreview').classList.add('hidden');$('#clearImgSource').classList.add('hidden')};
+$('#genImgBtn').onclick=async()=>{
+  const p=$('#imgPrompt').value.trim();if(!p)return;const b=$('#genImgBtn');b.disabled=true;$('#imgStatus').textContent='اللول بيشتغل...';
+  try{
+    const full=[p,$('#imgStyle').value].filter(Boolean).join(', ');
+    const src=window.elloolImageData||null;if(src&&$('#imgEngine').value!=='sd')throw new Error('اختار Stable Diffusion لتعديل صورة مرفوعة.');
+    const r=await genImage(full,$('#imgAspect').value,$('#imgEngine').value,src);
+    S.gallery.unshift({...r,prompt:full});renderGallery();$('#imgStatus').textContent='تم ✅';
+  }catch(e){$('#imgStatus').textContent='⚠️ '+e.message}
+  b.disabled=false;
+};
+
+/* ---------- تعديل فيديو محلي ---------- */
+let sourceVideoUrl=null;
+$('#videoUpload').onchange=()=>{const f=$('#videoUpload').files?.[0];if(!f)return;if(!f.type.startsWith('video/'))return toast('اختار ملف فيديو صحيح',1);if(f.size>250*1024*1024)return toast('الحد الأقصى 250MB في النسخة المحلية',1);if(sourceVideoUrl)URL.revokeObjectURL(sourceVideoUrl);sourceVideoUrl=URL.createObjectURL(f);$('#videoSource').src=sourceVideoUrl;$('#videoSource').classList.remove('hidden');$('#clearVideo').classList.remove('hidden');$('#videoSource').load()};
+$('#clearVideo').onclick=()=>{if(sourceVideoUrl)URL.revokeObjectURL(sourceVideoUrl);sourceVideoUrl=null;$('#videoSource').removeAttribute('src');$('#videoSource').classList.add('hidden');$('#clearVideo').classList.add('hidden');$('#videoUpload').value=''};
+$('#renderVideo').onclick=async()=>{const v=$('#videoSource'),status=$('#editVideoStatus'),btn=$('#renderVideo');if(!v.src)return toast('ارفع فيديو الأول',1);if(!v.videoWidth)return toast('انتظر تحميل الفيديو',1);btn.disabled=true;status.textContent='تجهيز التصدير...';try{const start=Math.max(0,+$('#videoStart').value||0),duration=Math.max(0,+$('#videoDuration').value||0);if(start>=v.duration)throw new Error('بداية المقطع بعد نهاية الفيديو');const end=duration?Math.min(v.duration,start+duration):v.duration;const W=Math.min(1280,v.videoWidth),H=Math.round(W*v.videoHeight/v.videoWidth),cv=document.createElement('canvas');cv.width=W;cv.height=H;const ctx=cv.getContext('2d');const stream=cv.captureStream(30);try{const audio=v.captureStream().getAudioTracks();audio.forEach(t=>stream.addTrack(t))}catch{}const mime=['video/webm;codecs=vp9','video/webm'].find(x=>MediaRecorder.isTypeSupported(x));if(!mime)throw new Error('المتصفح لا يدعم تصدير WebM');const rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:6500000}),chunks=[];rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);const stopped=new Promise(r=>rec.onstop=r);const filter=$('#videoFilter').value,caption=$('#videoCaption').value.trim();v.currentTime=start;await new Promise((res,rej)=>{v.onseeked=res;v.onerror=()=>rej(new Error('تعذر قراءة الفيديو'))});await v.play();rec.start();await new Promise(resolve=>{const frame=()=>{if(v.currentTime>=end||v.ended){v.pause();return resolve()}ctx.save();ctx.filter=filter==='bw'?'grayscale(1)':filter==='vivid'?'saturate(1.5) contrast(1.08)':filter==='soft'?'brightness(1.12) saturate(.88)':filter==='cinema'?'contrast(1.12) saturate(1.12) sepia(.16)':'none';ctx.drawImage(v,0,0,W,H);ctx.filter='none';if(filter==='cinema'){ctx.fillStyle='rgba(7,18,30,.12)';ctx.fillRect(0,0,W,H)}if(caption){ctx.direction='rtl';ctx.textAlign='center';ctx.font='bold '+Math.max(22,W*.035)+'px Cairo';ctx.shadowColor='#000';ctx.shadowBlur=8;ctx.fillStyle='#fff';ctx.fillText(caption,W/2,H*.88,W*.85)}ctx.restore();requestAnimationFrame(frame);status.textContent='تصدير '+Math.round((v.currentTime-start)/(end-start)*100)+'%'};frame()});rec.stop();await stopped;const blob=new Blob(chunks,{type:mime}),url=URL.createObjectURL(blob);$('#editedVideo').src=url;$('#editedVideo').classList.remove('hidden');$('#editedVideoDl').href=url;$('#editedVideoDl').classList.remove('hidden');status.textContent='تم التصدير. الصوت يُحفظ إذا كان المتصفح يسمح بالتقاطه.'}catch(e){status.textContent='تعذر التصدير: '+e.message}finally{btn.disabled=false}};
+
+/* ---------- الفيديو ---------- */
+function wrapText(ctx,text,maxW){const words=text.split(' ');const lines=[];let cur='';for(const w of words){const t=cur?cur+' '+w:w;if(ctx.measureText(t).width>maxW&&cur){lines.push(cur);cur=w}else cur=t}if(cur)lines.push(cur);return lines}
+function drawScene(ctx,img,p,cap,W,H,ms){
+  const iw=img.naturalWidth||W,ih=img.naturalHeight||H;
+  const sc=Math.max(W/iw,H/ih)*(1+0.14*p),w=iw*sc,h=ih*sc;
+  ctx.drawImage(img,(W-w)/2-p*30,(H-h)/2,w,h);
+  const g=ctx.createLinearGradient(0,H*.55,0,H);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.85)');ctx.fillStyle=g;ctx.fillRect(0,H*.55,W,H*.45);
+  ctx.fillStyle='#fff';ctx.font='bold 40px Cairo, sans-serif';ctx.textAlign='center';ctx.direction='rtl';
+  const lines=wrapText(ctx,cap||'',W*.8);lines.forEach((l,i)=>ctx.fillText(l,W/2,H-50-(lines.length-1-i)*54));
+  if(ms<500){ctx.fillStyle=`rgba(0,0,0,${1-ms/500})`;ctx.fillRect(0,0,W,H)}
+}
+const loadImg=url=>new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>rej(new Error('تعذر تحميل صورة المشهد'));i.src=url});
+$('#scBtn').onclick=async()=>{
+  const topic=$('#scTopic').value.trim();if(!topic)return;
+  const n=Math.min(8,Math.max(2,+$('#scN').value||4)),sec=Math.min(10,Math.max(2,+$('#scSec').value||4));
+  const b=$('#scBtn'),st=$('#scStatus');b.disabled=true;$('#scDl').classList.add('hidden');
+  try{
+    st.textContent='اللول بيكتب المشاهد...';
+    const raw=await ask(`You write short video scene lists. Output exactly ${n} lines. Each line: an ENGLISH visual description of one scene | a short Arabic caption. No numbering, no extra text.`,'Topic: '+topic,500);
+    let scenes=raw.split('\n').map(l=>l.replace(/^[\d\-\.\)\s*]+/,'').trim()).filter(l=>l.includes('|')).slice(0,n).map(l=>{const [p,...c]=l.split('|');return{prompt:p.trim(),caption:c.join('|').trim()}});
+    if(!scenes.length)scenes=topic.split('\n').filter(Boolean).slice(0,n).map(l=>({prompt:l,caption:l}));
+    const imgs=[];
+    for(let i=0;i<scenes.length;i++){
+      st.textContent=`اللول بيرسم مشهد ${i+1} من ${scenes.length}...`;
+      const r=await genImage(scenes[i].prompt+', cinematic wide scene','16:9',$('#imgEngine').value);
+      imgs.push(await loadImg(r.url));
+    }
+    await document.fonts.load('bold 40px Cairo');
+    const W=1280,H=720,cv=document.createElement('canvas');cv.width=W;cv.height=H;const ctx=cv.getContext('2d');
+    const mt=['video/webm;codecs=vp9','video/webm'].find(m=>MediaRecorder.isTypeSupported(m));
+    const rec=new MediaRecorder(cv.captureStream(30),{mimeType:mt,videoBitsPerSecond:6e6}),chunks=[];
+    rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);const stopped=new Promise(r=>rec.onstop=r);
+    const total=imgs.length*sec*1000;rec.start();const t0=performance.now();
+    await new Promise(res=>{const loop=()=>{
+      const t=performance.now()-t0;if(t>=total)return res();
+      const i=Math.min(imgs.length-1,Math.floor(t/(sec*1000))),local=t-i*sec*1000;
+      drawScene(ctx,imgs[i],local/(sec*1000),scenes[i].caption,W,H,local);
+      st.textContent=`تصدير الفيديو... ${Math.round(t/total*100)}%`;requestAnimationFrame(loop)};loop()});
+    rec.stop();await stopped;
+    const url=URL.createObjectURL(new Blob(chunks,{type:'video/webm'}));
+    const v=$('#scOut');v.src=url;v.classList.remove('hidden');const a=$('#scDl');a.href=url;a.download='ellool-video.webm';a.classList.remove('hidden');st.textContent='تم ✅';
+  }catch(e){st.textContent='⚠️ '+e.message}
+  b.disabled=false;setStatus('');
+};
+
+/* ---------- الربط ---------- */
+async function callConn(name,method='GET',path='/',body){
+  const c=S.v.connectors.find(x=>x.name===name);if(!c)throw new Error('ربط غير موجود: '+name);
+  const base=new URL(c.base);
+  if(base.username||base.password||base.hash)throw new Error('عنوان الربط لا يجب أن يحتوي بيانات دخول أو جزء #');
+  if(!(base.protocol==='https:'||(base.protocol==='http:'&&(base.hostname==='localhost'||base.hostname==='127.0.0.1'))))throw new Error('استخدم HTTPS، أو localhost للتطوير فقط');
+  const safePath=String(path||'/');
+  if(/^\s*(?:https?:)?\/\//i.test(safePath))throw new Error('اكتب مسار API فقط، وليس رابطاً كاملاً');
+  const u=new URL(c.base.replace(/\/+$/,'')+'/'+safePath.replace(/^\/+/,''));
+  if(u.origin!==base.origin)throw new Error('المسار خارج الموقع المربوط');
+  const h={};
+  if(c.auth==='bearer')h.Authorization='Bearer '+c.key;
+  else if(c.auth==='header')h[c.param||'x-api-key']=c.key;
+  else if(c.auth==='query')u.searchParams.set(c.param||'key',c.key);
+  const o={method,headers:h};
+  if(body&&method!=='GET'){h['Content-Type']='application/json';o.body=typeof body==='string'?body:JSON.stringify(body)}
+  const r=await fetch(u,o);const t=await r.text();
+  return 'HTTP '+r.status+'\n'+t.slice(0,4000);
+}
+function renderConn(){
+  $('#cList').innerHTML=S.v.connectors.map((c,i)=>`<div class="flex items-center justify-between bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs"><div><b>${esc(c.name)}</b> <span class="text-slate-500" dir="ltr">${esc(c.base)}</span></div><button data-i="${i}" class="text-rose-400">حذف</button></div>`).join('')||'<p class="text-xs text-slate-500">مفيش ربطات لسه.</p>';
+  $$('#cList [data-i]').forEach(b=>b.onclick=()=>{S.v.connectors.splice(+b.dataset.i,1);persist();renderConn()});
+  $('#cSel').innerHTML=S.v.connectors.map(c=>`<option>${esc(c.name)}</option>`).join('');
+}
+$('#cSave').onclick=()=>{
+  const name=$('#cName').value.trim().replace(/\s+/g,'-'),base=$('#cBase').value.trim();
+  if(!name||!base)return toast('الاسم والعنوان مطلوبين',1);
+  try{new URL(base)}catch{return toast('العنوان مش صحيح',1)}
+  S.v.connectors=S.v.connectors.filter(c=>c.name!==name);
+  S.v.connectors.push({name,base,auth:$('#cAuth').value,param:$('#cParam').value.trim(),key:$('#cKey').value});
+  $('#cKey').value='';persist();renderConn();toast('اتحفظ ومشفّر');
+};
+$('#cSend').onclick=async()=>{
+  const o=$('#cOut');o.textContent='...';let body=$('#cBody').value.trim();
+  try{o.textContent=await callConn($('#cSel').value,$('#cMethod').value,$('#cPath').value||'/',body||undefined)}catch(e){o.textContent='⚠️ '+e.message}
+};
+
+/* ---------- مفاتيح اللول ---------- */
+function renderKeys(){
+  $('#kList').innerHTML=S.v.keys.map((k,i)=>`<div class="flex items-center justify-between bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs ${k.revoked?'opacity-40':''}"><div><b>${esc(k.label)}</b> <span class="text-slate-500" dir="ltr">${esc(k.prefix)}…</span> <span class="text-slate-600">${new Date(k.created).toLocaleDateString('ar-EG')}</span></div><button data-i="${i}" class="text-rose-400">${k.revoked?'ملغي':'إلغاء'}</button></div>`).join('')||'<p class="text-xs text-slate-500">مفيش مفاتيح لسه.</p>';
+  $$('#kList [data-i]').forEach(b=>b.onclick=()=>{S.v.keys[+b.dataset.i].revoked=true;persist();renderKeys()});
+}
+$('#kGen').onclick=async()=>{
+  const label=$('#kLabel').value.trim()||'مفتاح';
+  const raw='ell_'+b64u(crypto.getRandomValues(new Uint8Array(32)));
+  S.v.keys.push({id:'k'+Date.now(),label,prefix:raw.slice(0,10),hash:await shaRaw(raw),created:Date.now()});
+  await saveVault();$('#kLabel').value='';renderKeys();
+  openModal('مفتاحك الجديد — انسخه دلوقتي',`<p class="text-xs text-amber-300 mb-2">مش هيظهر تاني. المحفوظ عندي بصمته بس.</p><pre class="bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs break-all whitespace-pre-wrap text-left" dir="ltr">${esc(raw)}</pre><button class="btn mt-3" id="cpKey">نسخ</button>`);
+  $('#cpKey').onclick=()=>{navigator.clipboard.writeText(raw);toast('اتنسخ')};
+};
+$('#kGate').onclick=()=>{
+  const hashes=S.v.keys.filter(k=>!k.revoked).map(k=>k.hash);
+  const code=`// Cloudflare Worker: بوابة اللول قدام خادمك الخاص
+// 1) أنشئ Worker وانسخ الكود ده فيه
+// 2) أضف متغيرات: UPSTREAM_URL (عنوان خادمك المتوافق مع OpenAI، مثل https://brain.example.com/v1)
+//    و MODEL (اسم النموذج) و UPSTREAM_KEY (اختياري)
+// 3) استدعِ: POST <worker>/chat/completions مع Authorization: Bearer ell_...
+const HASHES=${JSON.stringify(hashes)};
+async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return btoa(String.fromCharCode(...new Uint8Array(b)))}
+export default{async fetch(req,env){
+  const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'Authorization,Content-Type','Access-Control-Allow-Methods':'POST,OPTIONS'};
+  if(req.method==='OPTIONS')return new Response(null,{headers:cors});
+  const key=(req.headers.get('Authorization')||'').replace('Bearer ','');
+  if(!HASHES.includes(await sha(key)))return new Response('{"error":"unauthorized"}',{status:401,headers:cors});
+  const body=await req.json();if(env.MODEL)body.model=env.MODEL;
+  const h={'Content-Type':'application/json'};if(env.UPSTREAM_KEY)h.Authorization='Bearer '+env.UPSTREAM_KEY;
+  const r=await fetch(env.UPSTREAM_URL.replace(/\\/+$/,'')+'/chat/completions',{method:'POST',headers:h,body:JSON.stringify(body)});
+  return new Response(r.body,{status:r.status,headers:{...cors,'Content-Type':r.headers.get('Content-Type')||'application/json'}});
+}}`;
+  openModal('كود البوابة الوسيطة',`<pre class="bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs overflow-auto max-h-[55vh] text-left" dir="ltr">${esc(code)}</pre><button class="btn mt-3" id="cpGate">نسخ الكود</button><p class="text-xs text-slate-500 mt-2">لو ألغيت مفتاح أو أضفت واحد جديد، انسخ الكود تاني وحدّث الـ Worker.</p>`);
+  $('#cpGate').onclick=()=>{navigator.clipboard.writeText(code);toast('اتنسخ')};
+};
+
+/* ---------- الإعدادات ---------- */
+function fillSettings(){
+  const v=S.v;$('#sEngine').value=v.engine;$('#mLocal').value=v.localModel;$('#svUrl').value=v.server.url;$('#svModel').value=v.server.model;$('#svKey').value=v.server.key||'';$('#imgSrv').value=v.imgServer||'';$('#sSys').value=v.system;$('#sLock').value=v.lock;
+}
+$('#sSave').onclick=async()=>{
+  const v=S.v;v.engine=$('#sEngine').value;v.localModel=$('#mLocal').value.trim()||v.localModel;
+  v.server={url:$('#svUrl').value.trim(),model:$('#svModel').value.trim(),key:$('#svKey').value};v.imgServer=$('#imgSrv').value.trim();
+  v.system=$('#sSys').value;v.lock=Math.max(1,+$('#sLock').value||15);await saveVault();toast('اتحفظ');startIdle();
+};
+$('#prepBtn').onclick=async()=>{
+  S.v.engine='local';S.v.localModel=$('#mLocal').value.trim()||S.v.localModel;await saveVault();
+  const b=$('#prepBtn');b.disabled=true;
+  try{await ensureLocal();toast('العقل جاهز ✅')}catch(e){toast(e.message,1);setStatus('')}
+  b.disabled=false;
+};
+$('#sReset').onclick=()=>{$('#sSys').value=PERSONA;toast('اضغط حفظ للتأكيد')};
+$('#passSave').onclick=async()=>{
+  const p=$('#newPass').value;
+  if(p){if(p.length<10)return toast('كلمة السر لازم 10 أحرف على الأقل',1);
+    S.salt=crypto.getRandomValues(new Uint8Array(16));S.key=await deriveKey(p,S.salt);localStorage.setItem('ellool_gate',await shaPass(p));$('#newPass').value=''}
+  S.v.lock=Math.max(1,+$('#sLock').value||15);await saveVault();startIdle();toast('اتحدّث الأمان');
+};
+$('#wipeBtn').onclick=()=>{if(confirm('هتمسح كل المحادثات والربطات والإعدادات نهائياً. متأكد؟')){localStorage.removeItem('ellool_vault');localStorage.removeItem('ellool_gate');location.reload()}};
+$('#lockBtn').onclick=()=>location.reload();
+
+/* ---------- قفل تلقائي ---------- */
+let idleT,idleBound=false;
+function startIdle(){
+  const reset=()=>{clearTimeout(idleT);idleT=setTimeout(()=>location.reload(),(S.v.lock||15)*60000)};
+  if(!idleBound){idleBound=true;['mousemove','keydown','click','touchstart'].forEach(e=>document.addEventListener(e,()=>{if(!S.locked)reset()},{passive:true}))}
+  reset();
+}
+
+function boot(){
+  marked.setOptions({breaks:true});
+  $('#chatIn').placeholder='اسأل أي سؤال، اطلب كود احترافي، أو قول: ارسم لي شعار...';
+  if(!S.v.chats.length)newChat();else S.cur=S.v.chats[0].id;
+  renderChats();renderMsgs();startIdle();
+}
+renderMsgs();
+
+async function initAuth(){
+  const hasVault=!!localStorage.getItem('ellool_vault');
+  const hasVerifier=!!localStorage.getItem('ellool_gate');
+  const hint=$('#authHint'),confirmWrap=$('#authConfirmWrap'),submit=$('#authSubmit'),pass=$('#authPass');
+  if(!hasVault){
+    // Do not silently reuse the old hard-coded password on a fresh install.
+    hint.textContent='أول استخدام: أنشئ كلمة سر قوية لحماية بياناتك';
+    confirmWrap.classList.remove('hidden');
+    submit.textContent='إنشاء الخزنة وبدء الاستخدام';
+    pass.autocomplete='new-password';
+  }else{
+    hint.textContent='أدخل كلمة السر لفتح خزنتك المشفّرة';
+    confirmWrap.classList.add('hidden');
+    submit.textContent='فتح اللول';
+    pass.autocomplete='current-password';
+  }
+  $('#authForm').addEventListener('submit',async e=>{
+    e.preventDefault();
+    const p=pass.value,err=$('#authError');err.classList.add('hidden');submit.disabled=true;
+    try{
+      if(!localStorage.getItem('ellool_vault')){
+        if(p.length<10)throw new Error('استخدم كلمة سر من 10 أحرف على الأقل.');
+        if(p!==$('#authConfirm').value)throw new Error('كلمتا السر غير متطابقتين.');
+        await createFirstVault(p);
+      }else{
+        const ok=await unlock(p);
+        if(!ok)throw new Error('كلمة السر غير صحيحة أو تعذر فك تشفير الخزنة.');
+      }
+      S.locked=false;document.body.classList.remove('locked');
+      $('#authScreen').classList.add('hidden');
+      boot();toast('أهلاً بك في اللول ✅');
+    }catch(ex){err.textContent=ex.message||'تعذر فتح الخزنة';err.classList.remove('hidden')}
+    finally{submit.disabled=false}
+  });
+  pass.focus();
+}
+initAuth().catch(e=>toast('تعذر تهيئة شاشة الدخول: '+e.message,1));
+</script>
+</body>
+</html>
